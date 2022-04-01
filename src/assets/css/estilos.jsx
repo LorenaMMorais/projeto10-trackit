@@ -1,17 +1,16 @@
 import styled from 'styled-components';
 
 export const Corpo = styled.div`
-    width: 375px;
+    width: 393px;
     height: 667px;
     margin: 0 auto;
 
     display: flex;
     flex-direction: column;
-    // flex-wrap: wrap;
-    // justify-content: center;
     align-items: center;
 
     background: #FFFFFF;
+    z-index: 0;
 `
 export const Img = styled.img`
     width: 180px;

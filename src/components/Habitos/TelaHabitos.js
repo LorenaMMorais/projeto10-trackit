@@ -1,13 +1,13 @@
-import { Corpo } from '../../assets/css/estilosForm';
+import { Corpo } from '../../assets/css/estilos';
 import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
-import {ContainerHabitos, ContainerTitulo, Titulo, Plus, Texto} from "./estilo"
+import {ContainerHabitos, ContainerTitulo, Titulo, Plus, Texto, ConteudoHabitos} from "./estilo"
 
 export default function TelaHabitos(){
     return(
         <Corpo>
             <Header/>
-            <div className="conteudo">
+            <ConteudoHabitos>
                 <ContainerHabitos>
                     <ContainerTitulo>
                         <Titulo>Meus hábitos</Titulo>
@@ -15,7 +15,7 @@ export default function TelaHabitos(){
                     </ContainerTitulo>
                     <Texto>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear</Texto>
                 </ContainerHabitos>
-            </div>
+            </ConteudoHabitos>
             <Footer/>
         </Corpo>
     );

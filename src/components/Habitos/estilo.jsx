@@ -1,12 +1,25 @@
 import styled from 'styled-components';
 
+export const ConteudoHabitos = styled.main`
+    width: 91%;
+    heigth: 667px;
+
+    padding: 0 17px 350px 20px; 
+
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+    background: #F2F2F2;
+`
 export const ContainerHabitos = styled.div`
-    margin-top: 70px;
     padding: 0 17px 20px o; 
+
     display: flex;
     flex-direction: column;
 `
 export const ContainerTitulo = styled.div`
+    margin-top: 70px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -22,13 +35,14 @@ export const Titulo = styled.h1`
 
     color: #126BA5;
 `
-export const Plus = styled.div`
+export const Plus = styled.button`
     width: 40px;
     height: 35px;
 
     background: #52B6FF;
     border-radius: 4.63636px;
-    padding-bottom: 1px;
+    border: none;
+    padding-bottom: 3px;
     
     display: flex;
     align-items: center;

@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import {Corpo, Img, Form, Input, Button, LinkCadastro} from "./../../assets/css/estilosForm"
+import {Corpo, Img, Form, Input, Button, LinkCadastro} from "./../../assets/css/estilos"
 import logo from './../../assets/imagem/logo-trackit.png'
 
 export default function TelaCadastro(){
