@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Conteudo = styled.div`
+export const Corpo = styled.div`
     width: 375px;
     height: 667px;
     margin: 0 auto;

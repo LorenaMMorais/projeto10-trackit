@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom';
-import {Conteudo, Img, Form, Input, Button, LinkCadastro} from "./../../assets/css/estilosForm"
+import {Corpo, Img, Form, Input, Button, LinkCadastro} from "./../../assets/css/estilosForm"
 import logo from './../../assets/imagem/logo-trackit.png'
 
 export default function TelaCadastro(){
     return(
         <>
-            <Conteudo>
+            <Corpo>
                 <Img src={logo} alt="logo-trackit"/>
                 <Form>
                     <Input type="email" placeholder="email"/>
@@ -19,7 +19,7 @@ export default function TelaCadastro(){
                 <Link to="/">
                     <LinkCadastro className="link-cadastre-se">Já tem uma conta? Faça login!</LinkCadastro>
                 </Link>
-            </Conteudo>
+            </Corpo>
         </>
     );
 }
