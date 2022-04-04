@@ -1,8 +1,8 @@
 import { Corpo } from '../../assets/css/estilos';
 import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
-import { ConteudoHoje, ContainerHabitoHoje, Progresso, Titulo, TituloHabito, TituloHoje, SequenciaERecorde, BotaoHabitoFeito, HabitoHoje, ImgCheck } from './estilo';
-import checkmark from '../../assets/imagem/checkmark-outline.svg';
+import { ConteudoHoje, Progresso, Titulo, TituloHoje} from './estilo';
+import Habit from '../Habito/Habito';
 export default function TelaHoje(){
     return(
         <Corpo>
@@ -12,36 +12,7 @@ export default function TelaHoje(){
                     <Titulo>Segunda, 17/05</Titulo>
                     <Progresso>Nenhum hábito concluído ainda</Progresso>
                 </TituloHoje>
-                <ContainerHabitoHoje>
-                    <HabitoHoje>
-                        <TituloHabito>Ler 1 capítulo de livro</TituloHabito>
-                        <SequenciaERecorde>Sequência atual: 3 dias</SequenciaERecorde>
-                        <SequenciaERecorde>Seu recorde: 5 dias</SequenciaERecorde>
-                    </HabitoHoje>
-                    <BotaoHabitoFeito>
-                        <ImgCheck src={checkmark} alt="checkmark"/>
-                    </BotaoHabitoFeito>
-                </ContainerHabitoHoje>
-                <ContainerHabitoHoje>
-                    <HabitoHoje>
-                        <TituloHabito>Ler 1 capítulo de livro</TituloHabito>
-                        <SequenciaERecorde>Sequência atual: 3 dias</SequenciaERecorde>
-                        <SequenciaERecorde>Seu recorde: 3 dias</SequenciaERecorde>
-                    </HabitoHoje>
-                    <BotaoHabitoFeito>
-                        <ImgCheck src={checkmark} alt="checkmark"/>
-                    </BotaoHabitoFeito>
-                </ContainerHabitoHoje>
-                <ContainerHabitoHoje>
-                    <HabitoHoje>
-                        <TituloHabito>Ler 1 capítulo de livro</TituloHabito>
-                        <SequenciaERecorde>Sequência atual: 1 dias</SequenciaERecorde>
-                        <SequenciaERecorde>Seu recorde: 5 dias</SequenciaERecorde>
-                    </HabitoHoje>
-                    <BotaoHabitoFeito>
-                    <ImgCheck src={checkmark} alt="checkmark"/>
-                    </BotaoHabitoFeito>
-                </ContainerHabitoHoje>
+                <Habit type="hoje"/>
             </ConteudoHoje>
 
             <Footer/>

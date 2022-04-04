@@ -54,6 +54,11 @@ export const Plus = styled.button`
 
     color: #FFFFFF;
 `
+export const CaixaHabitos = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+`
 export const Texto = styled.p`
     width: 338px;
     height: 74px;
