@@ -1,6 +1,6 @@
 import { Corpo } from '../../assets/css/estilos';
 import Footer from '../Footer/Footer';
-import Habit from '../Habito/Habito';
+import Habito from '../Habito/Habito';
 import Header from '../Header/Header';
 import {ContainerHabitos, ContainerTitulo, Titulo, Plus, Texto, ConteudoHabitos, CaixaHabitos} from "./estilo"
 
@@ -15,8 +15,8 @@ export default function TelaHabitos(){
                         <Plus>+</Plus>
                     </ContainerTitulo>
                     <CaixaHabitos>
-                        <Habit type="novo"/>
-                        <Habit type="salvo"/>  
+                        <Habito type="novo"/>
+                        <Habito type="salvo"/>  
                     </CaixaHabitos>                
                     <Texto>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear</Texto>
                 </ContainerHabitos>

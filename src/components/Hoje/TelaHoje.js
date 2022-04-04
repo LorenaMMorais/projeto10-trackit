@@ -2,7 +2,7 @@ import { Corpo } from '../../assets/css/estilos';
 import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
 import { ConteudoHoje, Progresso, Titulo, TituloHoje} from './estilo';
-import Habit from '../Habito/Habito';
+import Habito from '../Habito/Habito';
 export default function TelaHoje(){
     return(
         <Corpo>
@@ -12,9 +12,8 @@ export default function TelaHoje(){
                     <Titulo>Segunda, 17/05</Titulo>
                     <Progresso>Nenhum hábito concluído ainda</Progresso>
                 </TituloHoje>
-                <Habit type="hoje"/>
+                <Habito type="hoje"/>
             </ConteudoHoje>
-
             <Footer/>
         </Corpo>
     );
