@@ -4,12 +4,12 @@ import lixeira from '../../assets/imagem/trash-outline.svg'
 import checkmark from '../../assets/imagem/checkmark-outline.svg';
 import { useState, useContext } from 'react';
 import axios from 'axios';
-import TokenContext from "../../context/Context";
+import UserContext from "../../contexts/UserContext";
 
 export default function Habit({type}){
     const [habito, setHabito] = useState({name: "", days: []});
     // const [selecionado, setSelecionado] = useState([]);
-    const {token} = useContext(TokenContext);
+    const {token} = useContext(UserContext);
     const semana = ['Seg','Ter','Qua','Qui','Sex','Sab','Dom'];
     
     function SelecionarDias(diaSmn){

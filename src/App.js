@@ -5,13 +5,13 @@ import TelaHoje from "./components/Hoje/TelaHoje";
 import TelaHistorico from "./components/Historico/TelaHistorico"
 import TelaLogin from './components/Login/TelaLogin';
 import { useState } from 'react';
-import TokenContext from "./context/Context";
+import UserContext from "./contexts/UserContext";
 
 export default function App(){
-    const [token, setToken] = useState("");
+    const [data, setData] = useState({});
 
     return(
-        <TokenContext.Provider value={{token, setToken}}>
+        <UserContext.Provider value={{data, setData}}>
             <BrowserRouter>
                 <Routes>
                     <Route path="/" element={<TelaLogin />} />
@@ -21,6 +21,6 @@ export default function App(){
                     <Route path="historico" element={<TelaHistorico/>}/>
                 </Routes>
             </BrowserRouter>
-        </TokenContext.Provider>
+        </UserContext.Provider>
     );
 }

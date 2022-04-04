@@ -47,6 +47,10 @@ export const Button = styled.button`
     height: 45px;
     cursor: pointer;
 
+    display:flex;
+    justify-content: center;
+    align-items: center;
+
     background: #52B6FF;
     border-radius: 4.63636px;
     border: none;
@@ -56,6 +60,7 @@ export const Button = styled.button`
     font-size: 20.976px;
     line-height: 26px;
     text-align: center;
+    text-decoration: none;
 
     color: #FFFFFF;
     ${props => props.desabilitado && 'opacity: 0.7'};
