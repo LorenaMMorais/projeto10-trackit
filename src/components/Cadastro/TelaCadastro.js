@@ -6,21 +6,18 @@ import {useState} from 'react'
 import axios from "axios";
 
 export default function TelaCadastro(){
-    const [dadosUsuario, setDadosUsuario] = useState ({email: "", nomeUsuario: "", urlImagem: "", senha: ""});
+    const [dadosUsuario, setDadosUsuario] = useState ({email: "", name: "", image: "", passaword: ""});
     const [desabilitado, setDesabilitado] = useState(false);
     const navigate = useNavigate();
 
     function enviarDados(e){
         e.preventDefault();
-        const URL_SING_UP = 'https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up'
-        const requisicao = axios.post(URL_SING_UP, dadosUsuario);
+        const requisicao = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up', dadosUsuario);
         setDesabilitado(true);
-        requisicao.then(resposta => {
-            navigate("/");
-        });
-        requisicao.catch(e => {
+        requisicao.then(() => navigate("/"));
+        requisicao.catch(erro => {
             setDesabilitado(false);
-            alert(`${e}. Login inválido, preenchar novamente!`);
+            alert(`${erro}. Login inválido, preenchar novamente!`);
         });
     }
 
@@ -29,10 +26,10 @@ export default function TelaCadastro(){
             <Corpo>
                 <Img src={logo} alt="logo-trackit"/>
                 <Form onSubmit={enviarDados}>
-                    <Input type="email" placeholder="email" value={dadosUsuario.email} onChange={(e) => setDadosUsuario({...dadosUsuario, email: e.target.value})} disabled={desabilitado} required/> 
-                    <Input type="password" placeholder="senha" value={dadosUsuario.senha} onChange={(e) => setDadosUsuario({...dadosUsuario, senha: e.target.value})} disabled={desabilitado} required/>
-                    <Input type="text" placeholder="nome" value={dadosUsuario.nomeUsuario} onChange={(e) => setDadosUsuario({...dadosUsuario, nomeUsuario: e.target.value})} disabled={desabilitado} required/>
-                    <Input type="url" placeholder="foto" value={dadosUsuario.urlImagem} onChange={(e) => setDadosUsuario({...dadosUsuario, urlImagem: e.target.value})} disabled={desabilitado} required/>
+                    <Input type="email" placeholder="email" value={dadosUsuario.email} onChange={e => setDadosUsuario({...dadosUsuario, email: e.target.value})} disabled={desabilitado} required/> 
+                    <Input type="password" placeholder="senha" value={dadosUsuario.passaword} onChange={e => setDadosUsuario({...dadosUsuario, passaword: e.target.value})} disabled={desabilitado} required/>
+                    <Input type="text" placeholder="nome" value={dadosUsuario.name} onChange={e => setDadosUsuario({...dadosUsuario, name: e.target.value})} disabled={desabilitado} required/>
+                    <Input type="url" placeholder="foto" value={dadosUsuario.image} onChange={e => setDadosUsuario({...dadosUsuario, image: e.target.value})} disabled={desabilitado} required/>
                     <Link to="/">
                         <Button type="submit" disabled={desabilitado}>{desabilitado ? <ThreeDots width="60" heigth="60" color="#FFFFFF" ariaLabel="loading"/> : "Cadastrar"}</Button>
                     </Link>

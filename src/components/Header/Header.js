@@ -1,12 +1,15 @@
 import {HeaderContainer, Logo, ImgPerfil} from "./estilo";
-import foto from './../../assets/imagem/foto-usuario.png';
+import { useContext } from "react";
+import UserContext from "./../../contexts/UserContext";
 
 export default function Header(){
+    const {data} = useContext(UserContext);
+
     return(
         <>
             <HeaderContainer>
                 <Logo>TrackIt</Logo>
-                <ImgPerfil src={foto} alt="foto do usuário" />
+                <ImgPerfil src={data.image} alt="foto do usuário" />
             </HeaderContainer>
         </>
     );

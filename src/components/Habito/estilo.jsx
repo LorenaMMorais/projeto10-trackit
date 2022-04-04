@@ -5,6 +5,8 @@ export const ContainerHabito = styled.div`
     height: 100%;
     padding: 18px 19px 15px;
 
+    display: ${props => props.plus ? "flex" : "none"};
+
     background: #FFFFFF;
     border-radius: 5px;
     box-sizing: border-box;
@@ -18,7 +20,7 @@ export const Input = styled.input`
     height: 45px;  
     margin-bottom: 8px; 
 
-    background: #FFFFFF;
+    background-color: ${props => props.disabled ? '#F2F2F2' : '#FFFFFF'};
     border: 1px solid #D5D5D5;
     box-sizing: border-box;
     border-radius: 5px;
@@ -34,7 +36,7 @@ export const Input = styled.input`
         font-size: 19.976px;
         line-height: 25px;
         
-        color: #DBDBDB;
+        color: ${props => props.disabled ? '#AFAFAF' : '#DBDBDB'};
     }
 `
 export const ContainerHabitoSalvo = styled.div`
@@ -83,7 +85,8 @@ export const BotaoCancelar = styled.button`
     height: 20px;
     cursor: pointer;
     
-    background: none;
+    
+    background-color: ${props => props.salvo ? "#52B6FF" : "#FFFFFF"}
     border: none;
 
     font-family: 'Lexend Deca';
@@ -92,7 +95,8 @@ export const BotaoCancelar = styled.button`
     line-height: 20px;
     text-align: center;
 
-    color: #52B6FF;
+    color: ${props => props.salvo ? "#FFFFFF" : "#52B6FF"};
+    ${props => props.desabilitado && 'opacity: 0.7' };
 `
 export const BotaoSalvar = styled.button`
     width: 84px;

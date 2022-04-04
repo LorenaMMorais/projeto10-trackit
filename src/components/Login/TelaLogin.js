@@ -11,15 +11,18 @@ export default function TelaLogin(){
     const [dadosUsuario, setDadosUsuario] = useState({email: "", password: ""});
     const [desabilitado, setDesabilitado] = useState(false);
     const navigate = useNavigate();
-    const {setData} = useContext(UserContext);
+    const {setToken, setAvatar} = useContext(UserContext);
     
     function EnviarDados(e){
         e.preventDefault();
-        const requisicao = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login', dadosUsuario);
+        setToken('');
+        setAvatar('');
+        const requisicao = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login', {email: dadosUsuario.email, password: dadosUsuario.password});
         setDesabilitado(true);
-        requisicao.then(resposta => {
-            setData(resposta.data);
+        requisicao.then((resposta )=> {
             navigate("/hoje");
+            setToken(resposta.data.token);
+            setAvatar(resposta.data.image);
         });
         requisicao.catch(e => {
             setDesabilitado(false);

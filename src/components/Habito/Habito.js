@@ -1,15 +1,15 @@
 import { BotaoCancelar, BotaoSalvar, Botoes, ContainerHabito, DiaDaSemana, HeaderHabitos, ImgTrash, Input, Semana } from "./estilo";
-import { BotaoHabitoFeito, ContainerHabitoHoje, HabitoHoje, ImgCheck, SequenciaERecorde, TituloHabito } from "../Hoje/estilo";
+import { TituloHabito } from "../Hoje/estilo";
 import lixeira from '../../assets/imagem/trash-outline.svg'
-import checkmark from '../../assets/imagem/checkmark-outline.svg';
+import {ThreeDots} from 'react-loader-spinner';
 import { useState, useContext } from 'react';
 import axios from 'axios';
 import UserContext from "../../contexts/UserContext";
 
-export default function Habit({type}){
+export default function Habito({type, plus, setPlus, dadosHabito, setListaHabitos}){
     const [habito, setHabito] = useState({name: "", days: []});
-    // const [selecionado, setSelecionado] = useState([]);
-    const {token} = useContext(UserContext);
+    const [desabilitado, setDesabilitado] = useState(false);
+    const {data} = useContext(UserContext);
     const semana = ['Seg','Ter','Qua','Qui','Sex','Sab','Dom'];
     
     function SelecionarDias(diaSmn){
@@ -21,56 +21,68 @@ export default function Habit({type}){
     }  
 
     function SalvarHabito(){
-        const URL_CRIAR_HABITO = 'https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits';
-        const config = {headers: {Authorization: `Bearer ${token}`}};
-        const requisicao = axios.post(URL_CRIAR_HABITO, habito, config);
-        requisicao.then(resposta => console.log(resposta));
-        requisicao.catch(error => console.log(error));
+        if(habito.days.length === 0){
+            alert("Por favor, selecione pelo menos um dia!");
+            return;
+        }
+
+        const config = {headers: {Authorization: `Bearer ${data.token}`}};
+        const requisicao = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits', habito, config);
+        setDesabilitado(true);
+        requisicao.then(resposta => {setPlus(false);
+                                     setDesabilitado(false);
+                                     setHabito({name: "", days: []});
+                                     BuscarHabitos();
+        });
+        requisicao.catch(resposta => {setDesabilitado(false);
+                                      (habito.name.length === 0) && alert("Por favor, preencha o nome do hábito!");
+        });
+    }
+
+    function BuscarHabitos(){
+        const config = {headers: {Authorization: `Bearer ${data.token}`}};
+        const requisicao = axios.get('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits', config);
+        requisicao.then(resposta => setListaHabitos(resposta.data));
+        requisicao.catch(e => console.log(e));
+    }
+
+    function DeletarHabitos(id){
+        if(window.confirm("Você está prestes a deletar permanentemente um hábito, confirmar esta ação?") === false) return;
+        const config = {headers: {Authorization: `Bearer ${data.token}`}};
+        const requisicao = axios.delete(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}`, config);
+        requisicao.then(() => BuscarHabitos());
+        requisicao.catch(resposta => console.log(resposta));
     }
     
     if(type === "novo"){
         return (
-            <ContainerHabito>
-                <Input type="text" placeholder="nome do hábito" value={habito.name} onChange={e => setHabito({...habito, name: e.target.value})}/>
+            <ContainerHabito plus={plus}>
+                <Input type="text" placeholder="nome do hábito" value={habito.name} onChange={e => setHabito({...habito, name: e.target.value})} disabled={desabilitado} required/>
                 <Semana>
                     {semana.map((e, i) => 
-                        <DiaDaSemana key={e} selecionado={habito.days.includes(i)} onClick={() => SelecionarDias(i)}>{e[0]}</DiaDaSemana>
+                        <DiaDaSemana type="button" key={e} selecionado={habito.days.includes(i)} onClick={() => SelecionarDias(i)} disabled={desabilitado}>{e[0]}</DiaDaSemana>
                     )}
                 </Semana>
                 <Botoes>
-                    <BotaoCancelar salvar={false}>Cancelar</BotaoCancelar>
-                    <BotaoSalvar salvar={true} onClick={SalvarHabito}>Salvar</BotaoSalvar>
+                    <BotaoCancelar salvar={false} onClick={() => setPlus(false)} disabled={desabilitado}>Cancelar</BotaoCancelar>
+                    <BotaoSalvar salvar={true} onClick={SalvarHabito}>{desabilitado ? <ThreeDots width="60" heigth="60" color="#FFFFFF" ariaLabel="loading"/> : "Salvar"}</BotaoSalvar>
                 </Botoes>
             </ContainerHabito>
         );
     }
     if(type ==="salvo"){
         return (
-            <ContainerHabito>
+            <ContainerHabito plus={true}>
                 <HeaderHabitos>
-                    <TituloHabito>Titulo do seu hábito</TituloHabito>
-                    <ImgTrash src={lixeira} alt="lixeira"/>
+                    <TituloHabito>{dadosHabito.name}</TituloHabito>
+                    <ImgTrash src={lixeira} alt="lixeira" onClick={() => DeletarHabitos(dadosHabito.id)}/>
                 </HeaderHabitos>
                 <Semana>
                     {semana.map((e, i) => 
-                        <DiaDaSemana key={e} selecionado={habito.days.includes(i)}>{e[0]}</DiaDaSemana>
+                        <DiaDaSemana key={e} selecionado={dadosHabito.days.includes(i)}>{e[0]}</DiaDaSemana>
                     )}
                 </Semana>
             </ContainerHabito>
-        );
-    }
-    if(type === "hoje"){
-        return(
-            <ContainerHabitoHoje>
-                <HabitoHoje>
-                    <TituloHabito>Ler 1 capítulo de livro</TituloHabito>
-                    <SequenciaERecorde>Sequência atual: 3 dias</SequenciaERecorde>
-                    <SequenciaERecorde>Seu recorde: 5 dias</SequenciaERecorde>
-                </HabitoHoje>
-                <BotaoHabitoFeito>
-                    <ImgCheck src={checkmark} alt="checkmark"/>
-                </BotaoHabitoFeito>
-            </ContainerHabitoHoje>
         );
     }
 }
