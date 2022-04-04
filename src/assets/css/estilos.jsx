@@ -27,7 +27,7 @@ export const Input = styled.input`
     height: 45px;
     padding-left: 11px;
 
-    background: #FFFFFF;
+    background-color: ${props => props.desabilitado ? '#F2F2F2' : '#FFFFFF'};
     border: 1px solid #D5D5D5;
     box-sizing: border-box;
     border-radius: 5px;
@@ -39,7 +39,7 @@ export const Input = styled.input`
         font-size: 19.976px;
         line-height: 25px;
 
-        color: #DBDBDB;
+        color: ${props => props.desabilitado ? '#AFAFAF' : '#DBDBDB'};
     }
 `
 export const Button = styled.button`
@@ -58,6 +58,7 @@ export const Button = styled.button`
     text-align: center;
 
     color: #FFFFFF;
+    ${props => props.desabilitado && 'opacity: 0.7'};
 `
 export const LinkCadastro = styled.p`
     width: 232px;
@@ -72,4 +73,5 @@ export const LinkCadastro = styled.p`
     text-decoration-line: underline;
 
     color: #52B6FF;
+    ${props => props.desabilitado && 'opacity: 0.7'};
 `
